@@ -1,0 +1,19 @@
+<script>
+    function download(filename, text) {
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+    
+      element.style.display = 'none';
+      document.body.appendChild(element);
+    
+      element.click();
+    
+      document.body.removeChild(element);
+    }
+</script>
+
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, dolores placeat ratione nisi autem tempore natus magni inventore repellat ut alias quia ab minima officia aut accusantium recusandae, possimus magnam. Veritatis dignissimos, dolor quod totam accusamus quibusdam illum itaque. Nam quidem dolorum deleniti doloribus mollitia ratione animi magni. Et cum, ea porro architecto aliquid totam, eos quisquam dicta ipsum, magni at vero voluptate blanditiis! Iusto sit excepturi fugiat unde, eveniet corrupti, porro illum, nemo nulla commodi officiis dicta labore minima vero rem odit doloremque nostrum eligendi! Ab deserunt voluptatem possimus rerum quo quos vero excepturi temporibus, laudantium, placeat at provident!</p>
+<div class="d-flex justify-content-center align-items-center">
+{% set code = Video_info["code"]['full_code'][0] %}
+<button onclick='download("code.py","Hello world")' class="btn btn-primary mx-2">download code file</button>

@@ -1,0 +1,240 @@
+{% extends "layout.html"%}
+{% block title %}Tutorials{% endblock title %}
+{% block body %}
+
+
+<!-- Font Style-2 -->
+<style>
+    /* .container {margin:2em 0;} */
+ /* 
+ Extra .small_cap devices (portrait phones, less than 544px) 
+ No media query since this is the default in Bootstrap because it is "mobile first"
+ */
+ h2 {font: size 1.2rem;}
+ h3 {font-size:1rem;}
+ .small_cap {font-size:5px;}
+ .bug_svg{width: 15px;height: 15px;}
+ .img_H{height: 70px;}
+ .bottom{margin-left: 0px;margin-right: 0px;}
+ 
+ /* .Small_cap devices (landscape phones, 544px and up) */
+ @media (min-width: 300px) {  
+   h2 {font-size:1.8rem;} /*1rem = 16px*/
+   h3 {font-size:1.3rem;} 
+ }
+ 
+ 
+ @media (min-width: 400px) {  
+   h2 {font-size:2.4rem;} /*1rem = 16px*/
+   h3 {font-size:1.3rem;} 
+ }
+ @media (min-width: 550px) {  
+   h2 {font-size:2.9rem;} /*1rem = 16px*/
+   h3 {font-size:1.3rem;margin-left: 10px;margin-right: 10px;} 
+ }
+ 
+ /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+ @media (min-width: 768px) {  
+   h2 {font-size:3rem;} /*1rem = 16px*/
+   h3 {font-size:1.3rem;margin-left: 10px;margin-right: 10px;} 
+ }
+ 
+ /* Large devices (desktops, 992px and up) */
+ @media (min-width: 992px) { 
+   h2 {font-size:3.1rem;} /*1rem = 16px*/
+   h3 {font-size:1.3rem;margin-left: 10px;margin-right: 10px;} 
+ }
+ 
+ /* Extra large devices (large desktops, 1200px and up) */
+ @media (min-width: 1200px) {  
+   h2 {font-size:3.5rem;} /*1rem = 16px*/  
+   h3 {font-size:1.4rem;margin-left: 15px;margin-right: 15px;} 
+ }
+</style>
+
+ 
+ <!-- Populer -->
+<div class="container px-4 py-5" id="featured-3">
+
+    <h2 class="pb-2 border-bottom border-3">
+        <div class="d-flex justify-content-center align-items-center">
+           <div>
+            <b>Populer tutorials </b>
+            <b style="font-size: 15px;"><span class="badge bg-warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+              </svg></span></b>
+           </div>
+          
+        </div>
+    </h2>
+    
+
+    <div class="row g-4 row-cols-1 row-cols-lg-3">
+       {% for tutorial in populer_tutorials %}
+       
+       <div class="feature col text-div">
+         
+         {% if loop.index==1 %}
+         <div class="mt-4">
+         <span title="Most Watched Tutorial" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" class="badge bg-success">Most Watched</span>
+         </div> 
+         {% else %}
+         <div class="mt-5">
+       
+         </div>
+         {% endif %}
+
+         <div>
+          <div class="feature-icon bg-gradient ml-0 px-0 mx-0">
+            <div class="d-flex justify-content-center align-items-center">
+              <img class="fluid-img" src="{{tutorial['thumbnail']}}" height="200" alt="">
+            </div>
+          </div>
+        
+          <div  class="d-flex justify-content-center align-items-center mt-1 mb-2">
+            <h6>{{tutorial["views"]}}</h6>
+        </div>
+
+          <div class="bottom">
+            <h3><b  class="d-flex justify-content-center align-items-center mt-3" >{{tutorial["name"]}}</b></h3>
+          
+            <p class="d-flex justify-content-center align-items-center" style="font-size: 17px;">{{tutorial["dsc"][:120]}}...</p>
+          </div>
+         </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+           <a onclick="" title="Click to Start Tutorial" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" href="{{tutorial['redirect']}}" type="Button"><butoon class="btn btn-danger mb-2">Start tutorial <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-play-btn mb-1 ml-1" viewBox="0 0 16 16">
+            <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+          </svg></butoon></a>
+        </div>
+      </div>
+
+       {% endfor %}
+      
+      <script>
+        //tutorial_views
+        function increament_tutorial_views(tutorial_name){
+          if(localStorage.getItem("")){
+
+          }
+        }
+      </script>
+
+  </div>
+
+</div>
+
+<br>
+
+<!-- Recently  -->
+<div class="container px-4 py-2" id="featured-3">
+    <h2 class="pb-2 border-bottom border-3">
+        <div class="d-flex justify-content-center align-items-center">
+           <div>
+            <b>Recently uploaded  </b>
+            <b style="font-size: 19px;"><span class="badge bg-warning">New</span></b>
+           </div>
+        </div>
+    </h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+       
+      {% for tutorial in recently_tutorial %}
+
+      <div class="feature col">
+         
+        {% if loop.index==1 %}
+        <div class="mt-0">
+        <span title="Most Watched Tutorial" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" class="badge bg-success">New</span>
+        </div> 
+        {% else %}
+        <div class="mt-4">
+          </div>
+        {% endif %}
+
+       <div class="feature-icon bg-gradient px-0 mx-0">
+         <div class="d-flex justify-content-center align-items-center">
+           <img class="fluid-img" src="{{tutorial['thumbnail']}}" height="200" alt="">
+         </div>
+         
+       </div>
+
+       <div  class="d-flex justify-content-center align-items-center mt-1 mb-2">
+          <h6>{{tutorial["views"]}}</h6>
+      </div>
+
+       <div class="bottom">
+        <h3><b  class="d-flex justify-content-center align-items-center" >{{tutorial["name"]}}</b></h3>
+      
+        <p class="d-flex justify-content-center align-items-center" style="font-size: 17px;">{{tutorial["dsc"][:120]}}...</p>
+        </div>
+     
+     
+       
+       <div class="d-flex justify-content-center align-items-center">
+          <a onclick="" title="Click to Start Tutorial" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" href="{{tutorial['redirect']}}" type="Button"><butoon class="btn btn-danger mb-2">Start tutorial <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-play-btn mb-1 ml-1" viewBox="0 0 16 16">
+           <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+           <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+         </svg></butoon></a>
+       </div>
+     </div>
+
+      {% endfor %}
+      
+    </div>
+
+  </div>
+
+
+<!-- All tutorials -->
+<div class="container px-4 py-2" id="featured-3">
+    <div class="d-flex justify-content-center align-items-center">
+      <h2 class="pb-2 border-bottom border-3">
+        <div>
+            <b>All Tutorials </b>
+            <b style="font-size: 15px;"><span class="badge bg-warning"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+              </svg></span></b>
+        </div>
+    </h2>
+    </div>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+       
+      {% for tutorial in all_tutorial %}
+
+      <div class="feature col">
+         
+      
+       <div class="feature-icon bg-gradient px-0 mx-0">
+         <div class="d-flex justify-content-center align-items-center">
+           <img class="fluid-img" src="{{tutorial['thumbnail']}}" height="200" alt="">
+         </div>
+       </div>
+       
+       <div  class="d-flex justify-content-center align-items-center mt-1 mb-2">
+        <h6>{{tutorial["views"]}}</h6>
+    </div>
+       
+       <div class="bottom">
+        <h3><b  class="d-flex justify-content-center align-items-center mt-3" >{{tutorial["name"]}}</b></h3>
+      
+        <p class="d-flex justify-content-center align-items-center" style="font-size: 17px;">{{tutorial["dsc"][:120]}}...</p>
+      </div>
+    
+
+       <div class="d-flex justify-content-center align-items-center">
+          <a onclick="" title="Click to Start Tutorial" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" href="{{tutorial['redirect']}}" type="Button"><butoon class="btn btn-danger mb-2">Start tutorial <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-play-btn mb-1" viewBox="0 0 16 16">
+           <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+           <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+         </svg></butoon></a>
+       </div>
+     </div>
+
+      {% endfor %}
+      
+    </div>
+
+  </div>
+
+
+{%endblock%}

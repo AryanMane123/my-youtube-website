@@ -1,0 +1,284 @@
+{% extends "layout.html"%}
+{% block title %}User Activities{% endblock title %}
+{% block body %}
+
+<style>
+  * { box-sizing: border-box; }
+body {
+  font: 16px Arial;
+}
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.invisible{
+    visibility: hidden;
+}
+.visible{
+    visibility:unset;
+}
+.hide{
+    display: none;
+}
+    .upper-control{margin-right: 0px;}
+    h2{font-size: 2rem;}
+  /* .Small_cap devices (landscape phones, 544px and up) */
+  @media (min-width: 300px) {  
+      .upper-control{margin-right: 0px;}
+      h2{font-size: 2.1rem;}
+  }
+  
+  @media (min-width: 570px) {  
+      .upper-control{margin-right: 50px;}
+      h2{font-size: 2.4rem;} 
+  }
+  
+  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+  @media (min-width: 700px) {  
+      .upper-control{margin-right: 100px;} 
+      h2{font-size: 2.5rem;} 
+  }
+  @media (min-width: 800px) {  
+      .upper-control{margin-right: 200px;}
+      h2{font-size: 2.6rem;}
+  }
+  @media (min-width: 900px) {  
+      .upper-control{margin-right: 300px;}
+      h2{font-size: 2.7rem;}
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 1020px) { 
+      .upper-control{margin-right: 300px;} 
+      h2{font-size: 2.7rem;}
+  }
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {  
+      .upper-control{margin-right: 500px;}
+      h2{font-size: 2.8rem;} 
+  }
+  @media (min-width: 1400px) {  
+      .upper-control{margin-right: 600px;} 
+  }
+  @media (min-width: 1500px) {  
+      .upper-control{margin-right: 800px;} 
+  }
+  .upper-ele {
+  position: relative;
+  text-align: center;
+}
+
+/* Centered text */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+  </style>
+
+
+<div class="img-fluid animated fadeInUp my-3">
+<script>
+  hava_one_video = false
+</script>
+
+    <h2 class="pb-2">
+      <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <b>Watched History</b>
+         </div>
+        </div>
+      </h2>
+    </div>
+    <div id="clear_btn" class="hide">
+    <div class="d-flex justify-content-center align-items-center hide" >
+        <button onclick="clear_history()" class="btn btn-danger">Clear History</button>
+       </div></div>
+       
+    <div id="no_history" class="hide">
+    <div class="d-flex justify-content-center align-items-center hide my-5" >
+       <h2>!! No watched history Found !!</h2>
+       </div></div>
+ 
+    <div class="album py-5">
+      <div class="container">
+        <div id="area" class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-5">
+          
+          {% for video in all_videos %}
+           
+            <div class="col hide" id="col{{video['id']}}">
+              <div class="card shadow-sm">
+            
+                <div class="thumb-image border border-3 border-dark upper-ele">
+                  <a title="Click to start Watching.." data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" type="button" href="/video/{{video['id']}}" ><img src="https://i.ytimg.com/vi/{{video['id']}}/maxresdefault.jpg" class="bg-dark bd-placeholder-img card-img-top "  alt="{{video['title']}}"> 
+                  </a>
+                
+                </div>
+    
+                <div class="card-body">
+                  <p title="{{video['access']['title']}}" data-bs-toggle="tooltip" data-bs-placement="top" class="card-text" style="font-size: 16px;"><b>{{video["title"]}}</b></p>
+                  <div class="d-flex fst-italic justify-content-between align-items-center">
+                  
+                          <div id="watch{{video['id']}}"></div>
+
+                              <small title="{{video['access']['duration']}}" data-bs-toggle="tooltip" data-bs-placement="top">{{video["duration"]}}</small>
+
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+              <script>
+                            watch = document.getElementById("watch{{video['id']}}")
+                             VideoArray = JSON.parse(localStorage.getItem("watched_videos"));
+                              result = false
+                              
+                              if(VideoArray !=  null){
+                                    VideoArray.forEach(element => {
+                                    if("{{video['id']}}" == element){
+                                    result = true
+                                  
+                                    }
+                                  });
+                                if(result){
+                                 
+                                  watch.innerHTML = ` 
+                                  <p class="text-success border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                              </svg> Watched</p>
+                                  `
+                                  result = false
+                                  hava_one_video = true
+                                  document.getElementById("col"+"{{video['id']}}").classList.remove("hide")
+                                }
+                                else{
+                                  watch.innerHTML = `
+                                  <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                              </svg>Not Watched</p> 
+                                  `
+                                  result = false
+                                }
+                              }
+                          
+                              else{
+                                console.log("In else")
+                                watch.innerHTML = `
+                                <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                              </svg>Not Watched</p> 
+                          
+                                  `}
+              </script>
+    {% endfor %}
+        
+        </div>
+      </div>
+    </div>
+
+
+</div>
+
+<script>
+
+if(hava_one_video == false){
+  no_history.classList.remove("hide")
+}
+else{
+  clear_btn.classList.remove("hide")
+}
+  
+function clear_history(){
+        if(confirm("Do you want to delete all history such as Watched videos and other !!")){
+          localStorage.removeItem("watched_videos")
+          location.reload()
+        }
+      }
+
+  drop_down_btn = document.getElementById("drop_down_btn")
+  Area = document.getElementById("Area")
+
+  function update_result(type){
+   
+  }
+  
+  function set_drop_down_btn(name){
+    drop_down_btn.innerText = name
+    update_result()
+  }
+  
+  var checked_list = ["Source code","Demo","Full explain","Suggetion"]
+  
+  function clicked(name){
+    is_in = false
+    for (let i = 0; i < checked_list.length; i++) {
+      if(checked_list[i] == name){
+        checked_list.splice(i,1)
+        is_in = true
+      }
+    }
+    if(is_in == false){
+      checked_list.push(name)
+    }
+    console.log(checked_list)
+    update_result()
+  }
+
+  width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  upper = document.getElementById("upper")
+  all = document.getElementById("all")
+  if(width < 630){
+    upper.classList.remove("d-flex")
+    upper.classList.remove("justify-content-center")
+    upper.classList.remove("align-items-center")
+    all.classList.add("my-4")
+    all.classList.add("mx-4")
+  }
+</script>
+
+{%endblock%}
+

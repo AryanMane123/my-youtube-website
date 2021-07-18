@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang=en>
+<style>.hide{display:none}.separator{display:flex;align-items:center;text-align:center}.separator::after,.separator::before{content:'';flex:1;border-bottom:1px solid #000}.separator:not(:empty)::before{margin-right:.25em}.separator:not(:empty)::after{margin-left:.25em}</style>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=icon href="{{ url_for('static', filename='img/logo.png') }}" type="image/icon type">
+<link rel=stylesheet href="{{ url_for('static', filename='css/layout.css') }}">
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="tuEk18Xo"></script>
+<title>{% block title %}{% endblock %} - ProgrammingLearner</title>
+<meta name=google-signin-scope content="profile email">
+<meta name=google-signin-client_id content=444424018537-57r1alojjqo4m1pq1hd4fg933l3esmn6.apps.googleusercontent.com>
+<script src=https://apis.google.com/js/platform.js async defer></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css>
+<script src=https://apis.google.com/js/platform.js async defer></script>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x crossorigin=anonymous>
+</head>
+<body>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class=container-fluid>
+<a data-bs-toggle=tooltip data-bs-placement=top title="Programming Learner" style=white-space:nowrap class="navbar-brand m-0" href=/home style=font-size:15px>
+<div class=col-4>
+<img style=width:40px class=rounded-circle src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+</div>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li id="nav1" class="active">
+<a class="nav-link" aria-current="page" href="/" style="font-size:17px"><b>Home</b></a>
+</li>
+<li id="nav3" class="active">
+<a class="nav-link" aria-current="page" href="/tutorials" style="font-size:17px"><b>Tutorials</b></a>
+</li>
+<li id="nav4" class="active">
+<a class="nav-link" aria-current="page" href="/projects" style="font-size:17px"><b>Projects</b></a>
+</li>
+<li id="nav5" class="active">
+<a class="nav-link" aria-current="page" target="_blank" href=/videos style="font-size:17px"><b>Videos</b></a>
+</li>
+</ul>
+<div class="d-flex width mx-3">
+<input data-bs-toggle=tooltip style="border-radius: 0px;" style="width: 100%;" data-bs-placement=bottom title="Search what You want ?" class="form-control" type="search" id="search-input" placeholder="Search what you want..." aria-label=Search>
+<button onclick="search()" type="button" class="btn btn-danger border-0" style="border-radius: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </svg><span class="glyphicon glyphicon-search"></span></button>
+</div>
+<a href="https://www.youtube.com/channel/UCdwDsfvCyz0rc0N8bH6S0GQ" target="_blank"><button data-bs-toggle=tooltip data-bs-placement=bottom title="Subscribe Our You Tube channel" href="https://www.youtube.com/channel/UCdwDsfvCyz0rc0N8bH6S0GQ" class="btn btn-danger mx-1 nav-margin" type=submit>Subscribe<svg xmlns=http://www.w3.org/2000/svg width=20 height=23 fill=currentColor class="bi bi-youtube ml-2" viewBox="0 0 16 16">
+<path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+</svg></button></a>
+
+<br>
+<div class=nav-margin>
+<div class="btn-group mr-2" id=full-btn style=font-size:18px>
+<button title="More Options" class="btn btn-dark rounded-circle" data-bs-toggle=dropdown aria-expanded=false><svg xmlns=http://www.w3.org/2000/svg width=26 height=29 fill=currentColor class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+<path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+</svg></button>
+<ul class="dropdown-menu dropdown-margin mt-2 border border-dark" id=more-btn style=font-size:17px>
+<li><a title="My activity" class="dropdown-item text-dark fw-bold" target="_blank" href=/user_activities>My Activities <svg xmlns=http://www.w3.org/2000/svg width=20 height=20 fill=currentColor viewBox="0 0 16 16">
+<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg></a></li>
+<li><hr class=dropdown-divider></li>
+<li><a title="Contact Me" class="dropdown-item text-dark fw-bold" target="_blank" href=/contact>Contact Me <svg xmlns=http://www.w3.org/2000/svg width=20 height=20 fill=currentColor class="bi bi-telephone-fill ml-2" viewBox="0 0 16 16">
+<path fill-rule=evenodd d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+</svg></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main>
+
+{% block body %} {% endblock %}
+</main>
+<div class="d-flex justify-content-center align-items-center my-3">
+<a href=# style=font-size:17px>Goto Top</a>
+</div>
+<div class=footer-dark>
+<footer>
+<div class=container>
+<div class=row>
+<div class="col-sm-6 col-md-3 item">
+<h3>Hub of Creative projects</h3>
+<ul>
+<li></li>
+<li><a href="/tutorials" target="_blank">Programming and Arduino tutorials</a></li>
+<li><a href="/projects" target="_blank">Programming and Arduino projects</a></li>
+<li><a href="/videos" target="_blank">Interactive videos</a></li>
+</ul>
+</div>
+<div class="col-sm-6 col-md-3 item">
+<h3>About</h3>
+<ul>
+<li><a href="/" target="_blank">Web devolper</a></li>
+<li><a href="https://www.youtube.com/channel/UCdwDsfvCyz0rc0N8bH6S0GQ" target="_blank">Youtuber</a></li>
+</ul>
+</div>
+<div class="col-md-6 item text">
+<h3>Why ?</h3>
+<p>Website for Programmers or Electronics and Robotics Engineers.</p>
+<p>&rarr; Special tutorials for begginears</p>
+<p>&rarr; Arduino projects Hub</p>
+<p>&rarr; Programming projects Hub</p>
+</div>
+<div class="col item social">
+    <a href="https://www.youtube.com/channel/UCdwDsfvCyz0rc0N8bH6S0GQ" target="_blank"><i class="icon ion-social-youtube"></i></a>
+    <a href="https://github.com/AryanMane123" target="_blank"><i class="icon ion-social-github"></i></a>
+    <a href=#><i class="icon ion-social-facebook"></i></a></div>
+</div>
+<p class=copyright>ProgrammingLearner © 2021</p>
+</div>
+</footer>
+</div>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js integrity=sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js integrity=sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT crossorigin=anonymous></script>
+<script>
+function search(){
+console.log("in function")
+search_input=document.getElementById("search-input").value.replaceAll("#","").replaceAll(" ","+")
+console.log("getted unput")
+if(document.getElementById("search-input").value != "" && document.getElementById("search-input").value != "#")
+    console.log("redirecting....")
+    window.location="http://127.0.0.1:5000/search/"+search_input
+}
+var tooltipTriggerList=[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+tooltipList=tooltipTriggerList.map(function(t){return new bootstrap.Tooltip(t)});
+
+full_btn=document.getElementById("full-btn")
+
+
+width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+
+if(width<1003){
+    full_btn.classList.remove("dropstart")
+    console.log(width)
+    full_btn.classList.add("dropstart")
+}</script>
+</body>
+</html>

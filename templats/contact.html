@@ -1,0 +1,94 @@
+{% extends "layout.html"%}
+{% block title %}Contact Me{% endblock title %}
+{% block body %}
+
+<title>Contact Me - ProgrammingLearner</title>
+
+<div class="d-flex justify-content-center align-items-center">
+    <h1><b>Contact Me</b></h1>
+</div>
+
+<div class="d-flex justify-content-center align-items-center my-5">
+    <form class="row g-3 needs-validation" id="contact_form" action="/" method="POST">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label"><b>First Name</b></label>
+          <input type="text" class="form-control" name="first_name" minlength="3"  maxlength="15" required placeholder="First name">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label"><b>Last Name</b></label>
+          <input type="text" class="form-control" name="last_name" minlength="3"  maxlength="15"  required placeholder="Last name">
+        </div>
+        <div class="col-md-6">
+          <label for="inputAddress" class="form-label"><b>Email</b></label>
+          <input type="email" class="form-control is-invalid" name="email" id="email" aria-describedby="input_email" placeholder="Your email address">
+          <div id="input_email" class="invalid-feedback">
+              Please enter valid email
+          </div>
+          <div id="input_email" class="valid-feedback">
+              Now email is valid !!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="inputAddress" class="form-label"><b>Phone num.</b></label>
+          <input type="text" class="form-control is-invalid" id="phone_num" maxlength="10" name="phone_num" placeholder="Your Phone num">
+          <div id="input_email" class="invalid-feedback">
+            Please enter valid phone num.
+        </div>
+        <div id="input_email" class="valid-feedback">
+            Now phone number is valid
+        </div>
+        </div>
+     
+        <div class="col-md-12">
+            <label class="form-label"><b>Your Massage</b></label>
+            <textarea name="message" required placeholder="Type your massage here.... No use emojis" minlength="5" maxlength="1000" class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+          </div>
+      
+        <div class="col-12 d-flex justify-content-center align-items-center">
+        </div>
+        <button type="submit" onclick="submit_form()" id="submit_btn" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+<script>
+  function submit_form(){
+    contact_form.submit;
+  }
+  function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+  valid_email = false
+  valid_phone_num = false
+  setInterval(() => {
+    if( validateEmail(email.value)){
+      email.classList.remove("is-invalid")
+      email.classList.add("is-valid")
+      valid_email = true
+    }
+    else{
+      email.classList.remove("is-valid")
+      email.classList.add("is-invalid")
+      valid_email = false
+    }
+    if(String(phone_num.value).length == 10){
+      phone_num.classList.remove("is-invalid")
+      phone_num.classList.add("is-valid")
+      valid_phone_num = true
+    }
+    else{
+      phone_num.classList.add("is-invalid")
+      phone_num.classList.remove("is-valid")
+      valid_phone_num = false
+    }
+  if(valid_email && valid_phone_num){
+    submit_btn.disabled = false
+  }
+  else{
+  submit_btn.disabled = true
+  }
+}, 500);
+submit_btn.disabled = false
+</script>
+
+{%endblock%}

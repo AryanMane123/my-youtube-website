@@ -1,0 +1,310 @@
+{% extends "layout.html" %}
+{% block title %}{{tutorial['name']}}{% endblock title %}
+{% block body %}
+
+<style>
+    .invisible{
+        visibility: hidden;
+    }
+    .visible{
+        visibility:unset;
+    }
+    .hide{
+        display: none;
+    }
+    h2 {font-size:1rem;} 
+    .thumb-image{width: 100%;height: 180;}
+    .play-btn{width: 15vw;height: 15vh;margin-top: 9vh;}
+    .progess-list{margin-left: 1vw;margin-right: 1vw;margin-top: 3vh;margin-bottom: 2vh;}
+    .table-list{width: 70vw;}
+    .heading-font{font-size: 16px;}
+  /* .Small_cap devices (landscape phones, 544px and up) */
+  @media (min-width: 300px) {  
+    h2 {font-size:1.3rem;} /*1rem = 16px*/
+    .thumb-image{width:100%;height: 210;}
+    .play-btn{width: 18vw;height: 18vh;margin-top: 9vh;}
+    .progess-list{margin-left: 1vw;margin-right: 1vw;margin-top: 3vh;margin-bottom: 2vh;}
+    .table-list{width: 60vw;}
+    .heading-font{font-size: 20px;}
+  }
+  
+  @media (min-width: 570px) {  
+    h2 {font-size:1.5rem;} /*1rem = 16px*/
+    .thumb-image{width: 100%;height: 180;}
+    .play-btn{width: 9vw;height: 10vh;margin-top: 0px;}
+    .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+    .table-list{width: 40vw;}
+    .heading-font{font-size: 19px;}
+  }
+  
+  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+  @media (min-width: 700px) {  
+    h2 {font-size:1.6rem;} /*1rem = 16px*/
+    .thumb-image{width: 100%;height: 250;}
+    .play-btn{width: 6vw;height: 6vh;margin-top: 0px;}
+    .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+    .table-list{width: 30vw;}
+    .heading-font{font-size: 20px;}
+  }
+  @media (min-width: 800px) {  
+    h2 {font-size:1.9rem;} /*1rem = 16px*/
+  }
+  @media (min-width: 900px) {  
+    h2 {font-size:1.9rem;} /*1rem = 16px*/
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 1020px) { 
+    h2 {font-size:2.1rem;} /*1rem = 16px*/
+    .thumb-image{width: 100%;height: 150;}
+    .play-btn{width: 6vw;height: 6vh;margin-top: 0px;}
+    .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+     .table-list{width: 20vw;}
+     .heading-font{font-size: 22px;}
+   
+  }
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {  
+    h2 {font-size:2.4rem;} /*1rem = 16px*/ 
+    .thumb-image{width: 100%;height: 150;} 
+    .play-btn{width: 4.7vw;height: 4.7vh;margin-top: 0px;}
+     .table-list{width: 20vw;}
+     .heading-font{font-size: 24px;}
+  }
+  .upper-ele {
+  position: relative;
+  text-align: center;
+}
+
+/* Centered text */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+  </style>
+
+<div id="page">
+
+ 
+    <div class="d-flex justify-content-center align-items-center m-3 my-4">
+       <h2>
+           <b>{{tutorial['name']}}</b>
+        </h2>
+    </div>
+
+
+    <div class="border border-2 p-2 progess-list">
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="{{tutorial['thumbnail']}}" class="img-fluid m-0 p-0" style="width: autox;height: 100px;" alt="img">
+      </div>
+        <h5 class="heading-font d-flex justify-content-center align-items-center text-success" style="margin: 1vh;"><b>Tutorial Dashboard</b></h5>
+          <div id="process_bar">
+            <div class="progress"  title="Tutorial Completed 0%" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p  style="text-align: center;font-size: 13px;"><b>Completed 0%</b></p>
+          </div>
+        <div class="d-flex justify-content-center align-items-center" style="margin-top: 3vh;">
+        <table class="table table-list">
+            <thead>
+              <tr>
+                <p style="text-align: center;"><th style="font-size: 15px;" scope="col">Total Videos</th></p>
+                <p style="text-align: center;"><th style="font-size: 15px;" scope="col">{{tutorial["total_video"]}}</th></p>
+              </tr>
+              <tr>
+                <p style="text-align: center;"><th style="font-size: 15px;" scope="col">Watched Videos</th></p>
+                <p style="text-align: center;" ><th style="font-size: 15px;" scope="col" id="Watched-video">0</th></p>
+              </tr>
+              <tr>
+                <p style="text-align: center;"><td style="font-size: 15px;"><b>Remaining Videos</b></td></p>
+                <p style="text-align: center;"><td style="font-size: 15px;"><b id="remaining_video">{{tutorial["total_video"]}}</td></p>
+              </tr>
+            </thead>
+           
+          </table>
+          </div>
+          
+
+<div class="d-flex justify-content-center align-items-center mt-2">
+  <a href='/video/{{tutorial["videos"][0]["id"]}}' target="_blank"><button title="Let's start tutorial now !!" id="watch_btn" data-bs-toggle="tooltip" class="btn btn-success mx-2 hide">Start Watching</button></a>
+  <button onclick="clear_history()" title="Delete All History of this Tutorial" id="clear_btn" data-bs-toggle="tooltip" class="btn btn-danger mx-2 hide">Clear Tutorial History</button>
+</div>
+
+    </div>
+
+    
+    
+    <script>
+
+      function clear_history(){
+        if(confirm("Do you want to delete all history related to this tutorial such as Watched videos and other !!")){
+          retrive_data = localStorage.getItem("watched_videos")
+        Array_data = JSON.parse(retrive_data)
+        let New_data = []
+        console.log(Video_ids)
+        for (let i = 0; i < Array_data.length; i++) {
+          for (let j = 0; j < Video_ids.length; j++) {
+            if(Array_data[i] == Video_ids[j]){
+              delete Array_data[i]
+            }
+          }
+        }
+        localStorage.setItem("watched_videos",JSON.stringify(Array_data))
+        window.location.reload()
+        }
+      }
+
+      var Video_ids = []
+
+       document.getElementById("process_bar").innerHTML = `<div class="progress"  title="Tutorial Completed 0%" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p  style="text-align: center;font-size: 13px;"><b>Completed 0%</b></p>` 
+      var Total_video_watched = 0
+      function watched_video(){
+          Total_video_watched+=1
+      }
+
+      function progess_bar(i){
+        document.getElementById("process_bar").innerHTML = `<div class="progress"  title="Tutorial Completed ${i}%" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <div class="progress-bar bg-warning" role="progressbar" style="width: ${i}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <p  style="text-align: center;font-size: 13px;"><b>Completed ${i}%</b></p>` 
+          if (i < persantage){
+            // progess_bar(i+1)
+            window.setTimeout(progess_bar,10,i+1)
+          }
+      }
+      i = 0
+      function dashboard_update(){
+         console.log(Total_video_watched)
+         document.getElementById("Watched-video").innerText = Total_video_watched
+         document.getElementById("remaining_video").innerText = "{{tutorial['total_video']}}" - Total_video_watched 
+         persantage = Math.floor(Total_video_watched / "{{tutorial['total_video']}}" *100)
+         console.log(persantage+" %")
+        
+        window.setTimeout(progess_bar,10,0)
+        
+
+      }
+  </script>
+
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-4">
+              
+              {% for i in range(len(tutorial["videos"])) %}
+              <div class="col">
+                <div class="card shadow-sm">
+              
+                  <div class="thumb-image upper-ele">
+                    <a title="Click to start watching..." data-bs-toggle="tooltip" data-bs-html="true" target="_blank" type="button" href='/video/{{tutorial["videos"][i]["id"]}}' id="thumb-img{{loop.index}}"><img src='https://i.ytimg.com/vi/{{tutorial["videos"][i]["id"]}}/maxresdefault.jpg' class="bd-placeholder-img card-img-top"  alt="{{video_title}}"> 
+                    </a>
+                
+                  </div>
+      
+                  <div class="card-body">
+                    <p title='{{tutorial["videos"][i]["access"]["title"]}}' data-bs-toggle="tooltip" data-bs-html="true" class="card-text" style="font-size: 16px;"><b>{{tutorial["videos"][i]["title"]}}</b></p>
+                    <div class="d-flex fst-italic justify-content-between align-items-center">
+                       
+                     
+                      <small class="" id='watch{{tutorial["videos"][i]["id"]}}'>
+
+                      </small>
+
+                        <script>
+                          Video_ids.push('{{tutorial["videos"][i]["id"]}}')
+                          watch = document.getElementById('watch{{tutorial["videos"][i]["id"]}}')
+                           VideoArray = JSON.parse(localStorage.getItem("watched_videos"));
+                            result = false
+                            
+                            if(VideoArray !=  null){
+                                  VideoArray.forEach(element => {
+                                  if('{{tutorial["videos"][i]["id"]}}' == element){
+                                  result = true
+                                
+                                  }
+                                });
+                              if(result){
+                                watched_video()
+                                watch.innerHTML = `   <p class="text-success border-0 m-0" style="border-radius: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                              <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                            </svg> Watched</p>
+                                `
+                                result = false
+                              }
+                              else{
+                                watch.innerHTML = `
+                                <p class="text-danger border-0 m-0" style="border-radius: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg> Not Watched</p>
+                                `
+                                result = false
+                              }
+                            }
+                        
+                            else{
+                              console.log("In else")
+                              watch.innerHTML = `
+                                <p class="text-danger border-0 m-0" style="border-radius: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg> Not Watched</p>
+                                `
+                            }
+                        </script>
+
+                      <small title='{{tutorial["videos"][i]["access"]["duration"]}}' data-bs-toggle="tooltip" data-bs-html="true">{{tutorial["videos"][i]["duration"]}}</small>
+                    </div>
+                  </div>
+                </div>
+            </div>
+                {% endfor %}
+
+                <script>
+                            dashboard_update()
+                </script>
+           
+          </div>
+        </div>
+      </div>
+
+
+
+      <script>
+        if (Total_video_watched > 0){
+          clear_btn = document.getElementById("clear_btn")
+          clear_btn.classList.remove("hide")
+        }
+        else{
+          watch_btn = document.getElementById("watch_btn")
+          watch_btn.classList.remove("hide")
+        }
+         play_btn = []
+          thumb_img = []
+          for (let i = 0; i < 10; i++) {
+              play_btn[i] =  document.getElementById("play-button"+(i+1))
+              thumb_img[i] =  document.getElementById("thumb-img"+(i+1))
+          }
+          
+          if(window.matchMedia("(pointer: coarse)").matches) {
+              // touch screen
+              console.log("Touch screen")
+            }
+            else{
+                // Non-touch screen
+               console.log("no-touch screen")
+                }
+       
+    </script>
+    
+
+</div>
+
+
+{% endblock %}
+
+

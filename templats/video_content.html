@@ -1,0 +1,510 @@
+{% extends "layout.html" %}
+{% block title %}{{Video_info['title']}} {% endblock title %}
+{% block body %}
+
+<!-- Make new data for language choosing in database ex,. Python , C , Arduino , HTML , JS.etc -->
+<style>
+  .hide{
+    visibility: hidden;
+  }
+  .h80{
+    max-height: 90vh;
+  }
+  .h100{
+    max-height: 100vh;
+  }
+  hr {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-top: 1px solid rgb(255, 255, 255);
+      background-color: rgb(255, 255, 255);
+      color: rgb(255, 255, 255);
+  }
+  a {
+      color: #82b440;
+      text-decoration: none;
+  }
+  .blog-comment::before,
+  .blog-comment::after,
+  .blog-comment-form::before,
+  .blog-comment-form::after{
+      content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .blog-comment{
+      padding-left:5%;
+    padding-right:5%;
+  }
+  
+  
+  .blog-comment ul{
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .blog-comment img{
+    opacity: 1;
+    filter: Alpha(opacity=100);
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+         -o-border-radius: 4px;
+        border-radius: 4px;
+  }
+  
+  .blog-comment img.avatar {
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+    width: 55px;
+    height: 55px;
+  }
+  
+  .blog-comment .post-comments{
+    border: 1px solid #eee;
+      margin-bottom: 15px;
+      margin-left: 69px;
+    margin-right: 0px;
+      padding: 5px 15px;
+      position: relative;
+      -webkit-border-radius: 4px;
+         -moz-border-radius: 4px;
+            -o-border-radius: 4px;
+          border-radius: 4px;
+    background: #fff;
+    color: #6b6e80;
+    position: relative;
+  }
+  
+  .blog-comment .meta {
+    font-size: 15px;
+    color: #aaaaaa;
+    padding-bottom: 4px;
+    margin-bottom: 3px !important;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .blog-comment ul.comments ul{
+    list-style-type: none;
+    padding: 0;
+    margin-left: 85px;
+  }
+  
+  .blog-comment-form{
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 40px;
+  }
+  
+  .blog-comment h3,
+  .blog-comment-form h3{
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 600;
+  }
+  .writer-text{
+    font-size: 16px;
+    font-weight: 600;
+    color:#747894;
+    }
+  .commet-font{
+    font-size: 16px;
+    }
+    /* small midium Divice */
+  @media (max-width:1200px) {
+    .accordion-body {
+      padding: 2px;
+      }
+  
+    .blog-comment{
+      padding-left:-2%;
+      padding-right:-2%;
+    }
+    .commet-font{
+    font-size: 12px;
+    }
+    .blog-comment img.avatar {
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+    width: 35px;
+    height: 35px;
+  }
+  .blog-comment .post-comments{
+    border: 1px solid #eee;
+      margin-bottom: 15px;
+      margin-left: 39px;
+    margin-right: 0px;
+      padding: 5px 15px;
+      position: relative;
+      -webkit-border-radius: 4px;
+         -moz-border-radius: 4px;
+            -o-border-radius: 4px;
+          border-radius: 4px;
+    background: #fff;
+    color: #6b6e80;
+    position: relative;
+  }
+  .writer-text{
+    font-size: 15px;
+    font-weight: 500;
+    color:#747894;
+    }
+    .blog-comment .meta {
+    font-size: 11px;
+    color: #aaaaaa;
+    padding-bottom: -4px;
+    margin-bottom: -3px !important;
+    border-bottom: 1px solid #eee;
+  }
+  .form-text{
+    font-size: 11px;
+  }
+  .blog-comment ul.comments ul {
+      list-style-type: none;
+      padding: 0;
+      margin-left: 30px;
+  }
+  }
+  @media (max-width:500px){
+    .email-font{
+      display: none;
+    }
+  }
+  /* .set-comment{height: 1500px;} */
+  </style>
+<link rel="stylesheet"href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/monokai-sublime.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/video_content.css') }}">
+
+<div id="full-page" class="container">   
+<div class="top">
+        <!-- Video -->
+        <div id="video">         
+          <div class="d-flex justify-content-center align-items-center" style="display: inline;">
+            {% if pre_video_id != "No" %}
+              <div id="go_back" title="Previous Page" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" style="margin-right: 8vw;">
+               <a href="/video/{{pre_video_id}}"><button id="pre_btn" style="border: 0px;border-radius: 60px;" class="control-btn btn btn-outline-danger p-0"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-left-fill p-0 " viewBox="0 0 16 16">
+                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg></button></a>
+              </div>  
+              {% else %}
+              <div id="go_back" title="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" style="margin-right: 8vw;">
+              <a><button id="pre_btn" style="border: 0px;border-radius: 60px;visibility: hidden;" class="control-btn btn btn-outline-danger p-0"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-left-fill p-0 " viewBox="0 0 16 16">
+               <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+             </svg></button></a>
+                
+              </div>
+               {% endif %}
+
+              <iframe class="video-size mx-0 bg-dark" style="border: 2px solid black;" src="https://www.youtube.com/embed/{{Video_info['id']}}" title="YouTube video player" frameborder="5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+        {% if next_video_id != "No" %}
+              <div id="go_next" style="margin-left: 8vw;">
+           <a href="/video/{{next_video_id}}"><button title="Next Page" id="next-btn"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" style="border: 0px;border-radius: 50px;" class="btn btn-outline-danger p-0 control-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-right-fill p-0 control-btn" viewBox="0 0 16 16">
+            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+          </svg></button></a>
+              </div>
+          {% else %}
+          <div id="go_next" style="margin-left: 8vw;">
+          <a><button title="Next Page" id="next-btn"  data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" style="border: 0px;border-radius: 50px;visibility: hidden;" class="btn btn-outline-danger p-0 control-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-right-fill p-0 control-btn" viewBox="0 0 16 16">
+           <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+         </svg></button></a>
+
+        </div>
+           {% endif %}
+          
+        </div></div>
+ <div class="d-flex justify-content-center align-items-center mt-3 ml-2">
+          <h1 class="fw-bold">{{Video_info["title"]}}</h1>
+        </div>
+      </div>
+      
+      
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <button id="hide-btn" class="btn btn-danger btn-sm mx-1">Hide Video <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mb-1 bi bi-eye-slash-fill" viewBox="0 0 16 16">
+          <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+          <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+        </svg></button>
+      <!-- </div> -->
+      
+      {% if is_tutorial %}
+      <!-- <div class="bottom d-flex justify-content-center align-items-center mt-2"> -->
+        <a href="{{tutorial_url}}">
+        <button  title="Goto tuturial main page" data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="top" class="btn btn-sm btn-danger mx-1">Tutorial Content  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-up-left mb-1 ml-1" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M7.364 3.5a.5.5 0 0 1 .5-.5H14.5A1.5 1.5 0 0 1 16 4.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 3 14.5V7.864a.5.5 0 1 1 1 0V14.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H7.864a.5.5 0 0 1-.5-.5z"/>
+          <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h5a.5.5 0 0 1 0 1H1.707l8.147 8.146a.5.5 0 0 1-.708.708L1 1.707V5.5a.5.5 0 0 1-1 0v-5z"/>
+        </svg></button></a>
+      </div>
+      {% endif %}
+
+      <div class="">
+
+
+         
+  
+          <!-- Description -->
+      <div class="mb-3"  style="margin-top: 8vh;">
+        <h3 class="d-flex justify-content-right align-items-left"><b><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class=" bi bi-file-earmark-minus mb-1" viewBox="0 0 16 16" width="28" height="28">
+          <path d="M5.5 9a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+          <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+        </svg> Description :</b></h3>
+      
+        <div class="my-3 inner-ele normal-font">
+          <p>{{Video_info["dsc"]}}</p>
+        </div>
+      
+      </div>
+
+      <hr>
+
+      {% if not normal_video %}
+        
+      <!-- Source Code -->
+      <div style="margin-top: 8vh; width: 90vw;">
+
+        <h3 class=""><b><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class=" bi bi-file-earmark-code mb-1" viewBox="0 0 16 16">
+          <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/> 
+          <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708z"/> 
+        </svg> Source Code :</b></h3>
+        <div class="code-length mt-3" id="source_code">
+
+           <!-- copy button -->
+           <div class="mr-3" style="float: right;">
+            <button id="copy-btn" style="border-radius: 20px;" class="btn btn-danger btn-sm copy-button"></button>
+          </div>
+          
+          <div>
+            <nav>
+              <div class="nav nav-tabs " id="nav-tab" role="tablist">
+  
+                <button class="nav-link active head-font" id="nav-n1-tab" onclick="set_nav('1')" data-bs-toggle="tab" data-bs-target="#nav-n1" type="button" role="tab" aria-controls="nav-n1" aria-selected="true"><b>{{Video_info["code"]["tab_name"][0]}}</b></button>
+  
+                {% if len(Video_info["code"]["tab_name"]) >= 2 %}
+                <button class="nav-link head-font" id="nav-n2-tab" onclick="set_nav('2')" data-bs-toggle="tab" data-bs-target="#nav-n2" type="button" role="tab" aria-controls="nav-n2" aria-selected="false"><b>{{Video_info["code"]["tab_name"][1]}}</b></button>             
+                {% endif %}
+  
+               {% if len(Video_info["code"]["tab_name"]) >= 3%}
+               <button class="nav-link head-font" id="nav-n3-tab" onclick="set_nav('3')" data-bs-toggle="tab" data-bs-target="#nav-n3" type="button" role="tab" aria-controls="nav-n3" aria-selected="false"><b>{{Video_info["code"]["tab_name"][2]}}</b></button>
+               {% endif %}
+  
+               {% if len(Video_info["code"]["tab_name"]) >= 4%}
+               <button class="nav-link head-font" id="nav-n4-tab" onclick="set_nav('4')" data-bs-toggle="tab" data-bs-target="#nav-n4" type="button" role="tab" aria-controls="nav-n4" aria-selected="false"><b>{{Video_info["code"]["tab_name"][3]}}</b></button>
+               {% endif %}
+  
+              </div>
+            </nav>
+            <div class="tab-content" style="margin-top: 7px;" id="nav-tabContent">
+  
+              <div class="tab-pane fade show active" id="nav-n1" role="tabpanel" aria-labelledby="nav-n1-tab">
+                <pre class="code-size" style="width: 100%;" id="full-code1"><code class="hljs language-python">{{Video_info["code"]["full_code"][0]}}</code></pre>
+              </div>
+  
+              {% if len(Video_info["code"]["tab_name"]) >= 2 %}
+                  <div class="tab-pane fade" id="nav-n2" role="tabpanel" aria-labelledby="nav-n2-tab">
+                    <pre class="code-size" style="width: 100%;" id="full-code2"><code class="hljs language-python">{{Video_info["code"]["full_code"][1]}}</code></pre>
+                  </div>      
+              {% endif %}
+  
+             {% if len(Video_info["code"]["tab_name"]) >= 3 %}
+                  <div class="tab-pane fade" id="nav-n3" role="tabpanel" aria-labelledby="nav-n3-tab">
+                    <pre class="code-size" style="width: 100%;" id="full-code3"><code class="hljs language-python">{{Video_info["code"]["full_code"][2]}}</code></pre>
+                  </div>
+                  {% endif %}
+                  
+            {% if len(Video_info["code"]["tab_name"]) >= 4 %}
+                  <div class="tab-pane fade" id="nav-n4" role="tabpanel" aria-labelledby="nav-n4-tab">
+                    <pre class="code-size" style="width: 100%;" id="full-code4"><code class="hljs language-python">{{Video_info["code"]["full_code"][3]}}</code></pre>
+                  </div>
+             {% endif %}
+  
+            </div>
+          </div>
+          
+        </div>
+      </div>
+     
+      <hr class="mt-4" style="height: 2px;">
+
+      <!-- Files and Others -->
+      <div  style="margin-top: 8vh;">
+        <h3 class="mt-5 ml-0"><b><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-file-earmark-arrow-down mb-1" viewBox="0 0 16 16" width="28" height="28">
+          <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
+          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+        </svg> Files and Others :</b></h3>
+
+        <div class="my-4 mr-5 ml-4 normal-font">
+          <div class="mb-5 mt-3">
+            {% if Video_info["files and other"]["file"]%}
+         
+            {% include "files_and_other/"+Video_info["files and other"]["file_name"] %}
+            
+            {% else %}
+            
+            <h6>No files required for this video but in other videos I provide some important files and Special announcement here !!!</h6>
+        
+            {% endif %}
+        </div>
+        </div>
+
+      </div>
+
+      <hr class="mt-4" style="height: 2px;">
+
+      <!-- Explaination -->
+      <div  style="margin-top: 8vh;">
+        
+      <h3 class="mt-5"><b><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"  class="bi bi-info-square mb-1" viewBox="0 0 16 16" width="28" height="28">
+        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+      </svg> Explaination : </b></h3>
+
+      <div class="inner-ele">
+        <div class="ml-1 normal-font my-4" id="explain">
+
+          {% if Video_info["explain"]["file"]%}
+
+          {% include "explaination/"+Video_info["explain"]["file_name"] %}
+
+          {% else %}
+          
+          <div class="mb-5 mt-3">
+            <h6>No Explaination required for this video but in other videos I Explain some imp. Topics and points here !!!</h6>
+          </div>
+        
+       
+          {% endif %}
+
+        </div>
+      </div> </div>
+      {% endif %}
+      <div></div>
+    
+    <div class="my-4">
+
+      {% if pre_video_id != "No" %}
+      <span style="margin-bottom: 10px;" class="ml-2">
+        <a href="/video/{{pre_video_id}}">
+         <button class="btn btn-danger mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-square-fill mb-1 mr-2" viewBox="0 0 16 16">
+           <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+         </svg> <b>Previous</b></button>
+        </a>
+       </span>
+       
+     {% else %}
+     <span style="margin-bottom: 10px;" class="ml-2">
+      <a href="">
+       <button class="btn btn-danger mb-3" style="visibility: hidden;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-square-fill mb-1 mr-2" viewBox="0 0 16 16">
+         <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+       </svg> <b>Previous</b></button>
+      </a>
+     </span>
+      {% endif %}
+
+      {% if next_video_id != "No" %}
+      <span style="float: right;margin-bottom: 10px;" class="mr-2">
+        <a href="/video/{{next_video_id}}">
+        <button class="btn btn-danger mb-3"><b>Next <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-square-fill mb-1 ml-2" viewBox="0 0 16 16">
+          <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+        </svg></b></button></a>
+       </span>
+       
+     {% else %}
+     <span style="float: right;margin-bottom: 10px;" class="mr-2">
+      <a href="=">
+      <button class="btn btn-danger mb-3" style="visibility: hidden;"><b>Next <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-square-fill mb-1 ml-2" viewBox="0 0 16 16">
+        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+      </svg></b></button></a>
+     </span>
+      {% endif %}
+
+    </div></div></div>
+
+ 
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<!-- <script src="{{ url_for('static', filename='js/video_content.js') }}"></script> -->
+<script>
+
+  function set_nav(num){
+    nav_num = num
+  }
+
+  setTimeout(()=>{
+  if (localStorage.getItem("watched_videos") == null){
+      console.log("{{Video_info['id']}}")
+      VideoArray = []
+      VideoArray.push("{{Video_info['id']}}")
+      localStorage.setItem("watched_videos", JSON.stringify(VideoArray))
+    }
+    else{
+    console.log("{{Video_info['id']}}")
+    item = localStorage.getItem("watched_videos")
+    VideoArray = JSON.parse(item)
+    new_video = true
+    VideoArray.forEach(ele => {
+      if(ele == "{{Video_info['id']}}"){
+        new_video = false
+      }
+    })
+    if(new_video){
+      VideoArray.push("{{Video_info['id']}}"),
+      localStorage.setItem("watched_videos", JSON.stringify(VideoArray));
+    }
+  }
+}, 5000)
+width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+go_back = document.getElementById("go_back");
+go_next = document.getElementById("go_next");
+
+if (width < 1050) {
+  go_back.classList.add("hide");
+  go_next.classList.add("hide");
+}
+hljs.highlightAll(), 
+nav_num = "1"
+var input_name = document.getElementById("name"),
+  input_comment = document.getElementById("comment"),
+  name_value = null,
+  comment_value = null;
+
+function copy_code(t) {
+  var e = document.querySelector("#full-code" + nav_num).innerText;
+  navigator.clipboard.writeText(e).then(
+    function () {},
+    function () {
+      console.error("Can't Copy code");
+    }
+  ),
+    (copy_btn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">       <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>     </svg><b> Copied</b>'),
+    setTimeout(() => {
+      copy_btn.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard mb-1" viewBox="0 0 16 16">             <path  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>           </svg><b> Copy </b>';
+    }, 3000);
+}
+
+  console.log("File imported"),
+  (copy_btn = document.getElementById("copy-btn")),
+  (copy_btn.innerHTML =
+    '<svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard mb-1" viewBox="0 0 16 16">           <path  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>         </svg><b> Copy</b>'),
+  copy_btn.addEventListener("click", copy_code),
+  (hide = !0),
+  (hide_btn = document.getElementById("hide-btn")),
+  (video = document.getElementById("video")),
+  hide_btn.addEventListener("click", () => {
+    hide
+      ? ((hide = !1),
+        video.classList.add("hide"),
+        (hide_btn.innerHTML =
+          'Show Video <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mb-1 bi bi-eye-fill" viewBox="0 0 16 16">     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>     <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>     </svg>'))
+      : ((hide = !0),
+        video.classList.remove("hide"),
+        (hide_btn.innerHTML =
+          'Hide Video <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mb-1 bi bi-eye-slash-fill" viewBox="0 0 16 16">     <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>       <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>         </svg>'));
+  })
+
+</script>
+{% endblock %}

@@ -1,0 +1,401 @@
+{% extends "layout.html" %}
+{% block title %}Videos{% endblock title %}
+{% block body %}
+
+
+<style>
+  .invisible{
+      visibility: hidden;
+  }
+  .visible{
+      visibility:unset;
+  }
+  .hide{
+      display: none;
+  }
+  h2 {font-size:1.1rem;} 
+  .thumb-image{width: 100%;height: 180;}
+  .play-btn{width: 15vw;height: 15vh;margin-top: 9vh;}
+  .progess-list{margin-left: 1vw;margin-right: 1vw;margin-top: 3vh;margin-bottom: 2vh;}
+  .table-list{width: 70vw;}
+  .heading-font{font-size: 14px;}
+/* .Small_cap devices (landscape phones, 544px and up) */
+@media (min-width: 350px) {  
+  h2 {font-size:1.3rem;} /*1rem = 16px*/
+  .thumb-image{width:100%;height: 210;}
+  .play-btn{width: 18vw;height: 18vh;margin-top: 9vh;}
+  .progess-list{margin-left: 1vw;margin-right: 1vw;margin-top: 3vh;margin-bottom: 2vh;}
+  .table-list{width: 60vw;}
+  .heading-font{font-size: 14px;}
+}
+
+@media (min-width: 570px) {  
+  h2 {font-size:1.5rem;} /*1rem = 16px*/
+  .thumb-image{width: 100%;height: 180;}
+  .play-btn{width: 9vw;height: 10vh;margin-top: 0px;}
+  .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+  .table-list{width: 40vw;}
+  .heading-font{font-size: 14px;}
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 700px) {  
+  h2 {font-size:1.6rem;} /*1rem = 16px*/
+  .thumb-image{width: 100%;height: 250;}
+  .play-btn{width: 6vw;height: 6vh;margin-top: 0px;}
+  .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+  .table-list{width: 30vw;}
+  .heading-font{font-size: 13px;}
+}
+@media (min-width: 800px) {  
+  h2 {font-size:1.9rem;} /*1rem = 16px*/
+}
+@media (min-width: 900px) {  
+  h2 {font-size:1.9rem;} /*1rem = 16px*/
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 1020px) { 
+  h2 {font-size:2.3rem;} /*1rem = 16px*/
+  .thumb-image{width: 100%;height: 150;}
+  .play-btn{width: 6vw;height: 6vh;margin-top: 0px;}
+  .progess-list{margin-left: 20vw;margin-right: 20vw;margin-top: 3vh;margin-bottom: 2vh;}
+   .table-list{width: 20vw;}
+   .heading-font{font-size: 15px;}
+ 
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+  h2 {font-size:2.6rem;} /*1rem = 16px*/ 
+  .thumb-image{width: 100%;height: 150;} 
+  .play-btn{width: 4.7vw;height: 4.7vh;margin-top: 0px;}
+   .table-list{width: 20vw;}
+   .heading-font{font-size: 15px;}
+}
+.upper-ele {
+position: relative;
+text-align: center;
+}
+
+/* Centered text */
+.center-text {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+
+
+<div>
+
+  
+<!-- TOp 10 -->
+<div>
+  <div class="d-flex justify-content-center align-items-center">
+    <h2 class="border-bottom pb-3 pt-3">
+        <b style="font-size: 20px;">
+         <span class="badge bg-warning text-dark" class="mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                 <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+               </svg>
+         </span>
+        </b>
+        <b>  Top 10 Videos  </b>
+        <b style="font-size: 20px;" class="mb-5">
+         <span class="badge bg-warning text-dark">
+             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                 <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+               </svg>
+         </span>  </b> </h2> </div>
+  <div class="py-1 mt-3">
+   <div class="container px-2 px-lg-5 mt-1">
+       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+           
+         {% for video in top_10_videos %}
+           
+         <div class="col mb-4">
+           <div class="card h-100 ">
+             <a type="button" href="/video/{{video['id']}}" target="_blank" data-bs-toggle="tooltip" data-bs-html="true" title="Click to start Watching.."> <img class="card-img-top border" src="https://i.ytimg.com/vi/{{video['id']}}/maxresdefault.jpg" alt="..." /></a>
+              
+               <div class="card-body p-1">
+               <p  data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["title"]}}' class="card-text heading-font"><b>{{video["title"]}}</b></p>
+                <div class="d-flex fst-italic justify-content-between align-items-center mt-2">
+                
+                  <div id="watch{{video['id']}}"></div>
+            <small  data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["duration"]}}' class="text-muted">{{video["duration"]}}</small> 
+               <script>
+                watch = document.getElementById("watch{{video['id']}}")
+                 VideoArray = JSON.parse(localStorage.getItem("watched_videos"));
+                  result = false
+                  
+                  if(VideoArray !=  null){
+                        VideoArray.forEach(element => {
+                        if("{{video['id']}}" == element){
+                        result = true
+                      
+                        }
+                      });
+                    if(result){
+                      watched_video()
+                      watch.innerHTML = ` 
+                      <p class="text-success border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                  </svg> Watched</p>
+                      `
+                      result = false
+                    }
+                    else{
+                      watch.innerHTML = `
+                      <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>Not Watched</p> 
+                      `
+                      result = false
+                    }
+                  }
+              
+                  else{
+                    console.log("In else")
+                    watch.innerHTML = `
+                    <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>Not Watched</p> 
+              
+                      `
+                  }
+              </script> </div></div></div></div>
+       
+         {% endfor %}
+      
+       </div>
+   </div>
+ </div>
+</div>
+
+<hr style="height: 3px;">
+  
+<!-- Recently uploaded -->
+<div>
+  <div class="d-flex justify-content-center align-items-center">
+    <h2 class="pb-2 mt-3 border-bottom">
+      <div class="d-flex justify-content-center align-items-center">
+         <div>
+           <b style="font-size: 16px;"><span class="badge bg-success">New</span></b>
+          <b>Recently uploaded  </b>
+          <b style="font-size: 16px;"><span class="badge bg-success">New</span></b>
+         </div>
+      </div>
+  </h2>
+ </div>
+ 
+ 
+ <div class="py-1 mt-3">
+   <div class="container px-2 px-lg-5 mt-1">
+       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+           
+         {% for video in Recently_video %}
+           
+         <div class="col mb-4">
+           <div class="card h-100 border border-2">
+              <a type="button" href="/video/{{video['id']}}" target="_blank" data-bs-toggle="tooltip" data-bs-html="true" title="Click to start Watching.."> <img class="card-img-top " src="https://i.ytimg.com/vi/{{video['id']}}/maxresdefault.jpg" alt="..." /></a>
+               
+             <div class="card-body p-1">
+               <p data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["title"]}}' class="card-text heading-font"><b>{{video["title"]}}</b></p>
+                 <div class="d-flex fst-italic justify-content-between align-items-center mt-2">
+                   <div id="watch{{video['id']}}"></div>
+
+                <small data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["duration"]}}' class="text-muted">{{video["duration"]}}</small>
+                 </div>
+               </div>
+              
+               <script>
+                watch = document.getElementById("watch{{video['id']}}")
+                 VideoArray = JSON.parse(localStorage.getItem("watched_videos"));
+                  result = false
+                  
+                  if(VideoArray !=  null){
+                        VideoArray.forEach(element => {
+                        if("{{video['id']}}" == element){
+                        result = true
+                      
+                        }
+                      });
+                    if(result){
+                      watched_video()
+                      watch.innerHTML = ` 
+                      <p class="text-success border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                  </svg> Watched</p>
+                      `
+                      result = false
+                    }
+                    else{
+                      watch.innerHTML = `
+                      <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>Not Watched</p> 
+                      `
+                      result = false
+                    }
+                  }
+              
+                  else{
+                    console.log("In else")
+                    watch.innerHTML = `
+                    <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>Not Watched</p> 
+              
+                      `
+                  }
+              </script>
+             
+           </div>
+       </div>
+       
+         {% endfor %}
+      
+       </div>
+   </div>
+ </div>
+</div>
+
+<hr style="height: 3px;">
+  
+<!-- All -->
+<div class="">
+  <div class="d-flex justify-content-center align-items-center">
+    <h2 class="pb-2 mt-4 border-bottom">
+      <div>
+        <b style="font-size: 15px;"><span class="badge p-0 bg-info"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-check-all p-0" viewBox="0 0 16 16">
+            <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+          </svg></span></b>
+          <b>All Videos </b>
+          <b style="font-size: 15px;"><span class="badge p-0 bg-info"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-check-all p-0" viewBox="0 0 16 16">
+              <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+            </svg></span></b>
+      </div>
+  </h2>
+ </div>
+ 
+ 
+ <div class="py-1 mt-3">
+   <div class="container px-2 px-lg-5 mt-1">
+       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+           
+         {% for video in all_videos %}
+           
+         <div class="col mb-4">
+           <div class="card h-100 border border-2">
+              
+                 <span>
+                  <a type="button" href="/video/{{video['id']}}" target="_blank" data-bs-toggle="tooltip" data-bs-html="true" title="Click to start Watching.."> <img class="card-img-top border " src="https://i.ytimg.com/vi/{{video['id']}}/maxresdefault.jpg" alt="..." /></a>
+                 </span>
+          
+               <div class="card-body p-1">
+               <p data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["title"]}}' class="card-text heading-font"><b>{{video['title']}}</b></p>
+                 <div class="d-flex fst-italic justify-content-between align-items-center mt-2">
+                      <div id="watch{{video['id']}}"> </div>
+                   <small  data-bs-toggle="tooltip" data-bs-html="true" title='{{video["access"]["duration"]}}' class="text-muted">{{video["duration"]}}</small>
+
+                 </div>
+               </div>
+
+                <script>
+                          watch = document.getElementById("watch{{video['id']}}")
+                           VideoArray = JSON.parse(localStorage.getItem("watched_videos"));
+                            result = false
+                            
+                            if(VideoArray !=  null){
+                                  VideoArray.forEach(element => {
+                                  if("{{video['id']}}" == element){
+                                  result = true
+                                
+                                  }
+                                });
+                              if(result){
+                                watched_video()
+                                watch.innerHTML = ` 
+                                <p class="text-success border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                              <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                            </svg> Watched</p>
+                                `
+                                result = false
+                              }
+                              else{
+                                watch.innerHTML = `
+                                <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>Not Watched</p> 
+                                `
+                                result = false
+                              }
+                            }
+                        
+                            else{
+                              console.log("In else")
+                              watch.innerHTML = `
+                              <p class="text-danger border-0 mb-0 pb-0" style="border-radius: 20px;font-size: 14px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>Not Watched</p> 
+                        
+                                `
+                            }
+                </script>
+              
+             
+           </div>
+       </div>
+       
+         {% endfor %}
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+<div class="d-flex justify-content-center align-items-center my-4">
+ <h6>For more videos visit <a target="_blank" href="https://www.youtube.com/channel/UCdwDsfvCyz0rc0N8bH6S0GQ"> Programming Learner youtube Channel</a></h6>
+</div>
+
+{% endblock %}

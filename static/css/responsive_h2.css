@@ -1,0 +1,47 @@
+  /* .container {margin:2em 0;} */
+/* 
+Extra .small_cap devices (portrait phones, less than 544px) 
+No media query since this is the default in Bootstrap because it is "mobile first"
+*/
+h2 {font-size:0.8rem;} 
+.small_cap {font-size:5px;}
+.bug_svg{width: 15px;height: 15px;}
+.img_H{height: 70px;}
+
+/* .Small_cap devices (landscape phones, 544px and up) */
+@media (min-width: 300px) {  
+  h2 {font-size:0.8rem;} /*1rem = 16px*/
+  .img_H{height:80px;}
+}
+
+
+@media (min-width: 400px) {  
+  h2 {font-size:0.4rem;} /*1rem = 16px*/
+  .img_H{height:130px;}
+  .small_cap {font-size: 9px;}
+.bug_svg{width: 15px;height: 15px;}
+
+}
+@media (min-width: 534px) {  
+  h2 {font-size:1.2rem;} /*1rem = 16px*/
+  .img_H{height:130px;}
+ 
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+  h2 {font-size:1.6rem;} /*1rem = 16px*/
+  .img_H{height: 170px;}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  h2 {font-size:2.9rem;} /*1rem = 16px*/
+  .img_H{height: 210px;}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+  h2 {font-size:3rem;} /*1rem = 16px*/  
+  .img_H{height: 250px;}  
+}

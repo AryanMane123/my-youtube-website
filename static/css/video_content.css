@@ -1,0 +1,396 @@
+.hide {
+  display: none;
+}
+.hide1 {
+  visibility: hidden;
+}
+.center {
+  width: 800px;
+  height: 405px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.copy-code {
+  position: initial;
+  top: 5px;
+}
+.btn-copy-none {
+  visibility: hidden;
+}
+.btn-copy-display {
+  display: block;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #000 transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+h1 {
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+.bottom {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+h3 {
+  font-size: 1rem;
+}
+.control-btn {
+  height: 0;
+  width: 0;
+}
+.icon-size {
+  height: 50%;
+  width: 50%;
+}
+.video-size {
+  height: 40vh;
+  width: 100%;
+}
+.code-length {
+  margin-left: 0;
+  font-size: 13px;
+}
+.inner-ele {
+  margin-left: 20px;
+}
+.copy-button {
+  margin-right: 0;
+}
+.code-size {
+  max-height: 70vh;
+  width: 100%;
+}
+.heading-comment {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+.all-comment {
+  font-size: 16px;
+}
+.username {
+  font-size: 12px;
+}
+.replay {
+  width: 70vw;
+}
+.normal-font {
+  font-size: 16px;
+}
+.hading1 {
+  font-size: 1.3rem;
+}
+.head-font {
+  font-size: 0.9rem;
+  padding: 7px;
+}
+.go-back {
+  display: none;
+}
+.go-next {
+  display: none;
+}
+@media (min-width: 300px) {
+  h1 {
+    font-size: 1rem;
+    margin-left: 5px;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  .control-btn {
+    height: 0;
+    width: 0;
+  }
+  .icon-size {
+    height: 50%;
+    width: 50%;
+  }
+  .video-size {
+    height: 35vh;
+    width: 100%;
+  }
+  .code-length {
+    width: 100vw;
+    margin-left: 0;
+  }
+  .head-font {
+    font-size: 1.09rem;
+    padding: 7px;
+  }
+}
+@media (min-width: 400px) {
+  h1 {
+    font-size: 1.1rem;
+    margin-left: 5px;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  .control-btn {
+    height: 0;
+    width: 0;
+  }
+  .icon-size {
+    height: 50%;
+    width: 50%;
+  }
+  .video-size {
+    height: 35vh;
+    width: 100%;
+  }
+  .code-length {
+    width: 100vw;
+    margin-left: 0;
+  }
+  .head-font {
+    font-size: 1.1rem;
+    padding: 11px;
+  }
+}
+@media (min-width: 534px) {
+  h1 {
+    font-size: 1.2rem;
+    margin-left: 5px;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  .control-btn {
+    height: 0;
+    width: 0;
+  }
+  .icon-size {
+    height: 50%;
+    width: 50%;
+  }
+  .video-size {
+    height: 60vh;
+    width: 100%;
+  }
+  .code-length {
+    width: 100vw;
+    margin-left: 5px;
+  }
+  .normal-font {
+    font-size: 17px;
+  }
+  .head-font {
+    font-size: 1.1rem;
+    padding: 11px;
+  }
+}
+@media (min-width: 774px) {
+  h1 {
+    font-size: 1.2rem;
+    margin-left: 5px;
+  }
+  .bottom {
+    margin-left: 100px;
+  }
+  h3 {
+    font-size: 1.9rem;
+  }
+  .control-btn {
+    height: 0;
+    width: 0;
+  }
+  .icon-size {
+    height: 50%;
+    width: 50%;
+  }
+  .video-size {
+    height: 50vh;
+    width: 70vw;
+  }
+  .code-length {
+    width: 90vw;
+    margin-left: 10px;
+  }
+  .inner-ele {
+    margin-left: 10px;
+  }
+  .copy-button {
+    margin-right: 10px;
+  }
+  .heading-comment {
+    font-size: 1.1rem;
+  }
+  .all-comment {
+    font-size: 0.8rem;
+  }
+  .username {
+    font-size: 0.7rem;
+  }
+  .head-font {
+    font-size: 1.3rem;
+    padding: 11px;
+  }
+}
+@media (min-width: 1092px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  .bottom {
+    margin-left: 100px;
+    margin-right: 200px;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  .control-btn {
+    height: 90px;
+    width: 90px;
+  }
+  .icon-size {
+    height: 10%;
+    width: 10%;
+  }
+  .video-size {
+    height: 60vh;
+    width: 60vw;
+    margin-top: 30px;
+  }
+  .code-length {
+    width: 80vw;
+    margin-left: 20px;
+    font-size: 17px;
+  }
+  .inner-ele {
+    margin-left: 10px;
+  }
+  .copy-button {
+    margin-right: 20px;
+  }
+  .code-size {
+    max-height: 80vh;
+  }
+  .heading-comment {
+    font-size: 1.06rem;
+  }
+  .all-comment {
+    font-size: 0.9rem;
+  }
+  .username {
+    font-size: 0.8rem;
+  }
+  .replay {
+    width: 60vw;
+  }
+  .normal-font {
+    font-size: 17px;
+  }
+  .go-next {
+    margin-left: 70px;
+  }
+  .go-back {
+    margin-right: 70px;
+  }
+  .hading1 {
+    font-size: 1.4rem;
+  }
+  .head-font {
+    font-size: 1.14rem;
+    padding: 12px;
+  }
+}
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+  .bottom {
+    margin-left: 250px;
+    margin-right: 200px;
+  }
+  h3 {
+    font-size: 1.6rem;
+  }
+  .control-btn {
+    height: 90px;
+    width: 90px;
+  }
+  .icon-size {
+    height: 10%;
+    width: 10%;
+  }
+  .video-size {
+    height: 60vh;
+    width: 52vw;
+    margin-top: 30px;
+  }
+  .code-length {
+    width: 80vw;
+    margin-left: 40px;
+    font-size: 17px;
+  }
+  .inner-ele {
+    margin-left: 30px;
+  }
+  .copy-button {
+    margin-right: 30px;
+    margin-top: 14px;
+  }
+  .code-size {
+    max-height: 90vh;
+  }
+  .heading-comment {
+    font-size: 1.1rem;
+  }
+  .all-comment {
+    font-size: 1.1rem;
+  }
+  .username {
+    font-size: 0.9rem;
+  }
+  .replay {
+    width: 50vw;
+  }
+  .normal-font {
+    font-size: 18px;
+  }
+  .go-next {
+    margin-left: 100px;
+  }
+  .go-back {
+    margin-right: 100px;
+  }
+  .hading1 {
+    font-size: 1.5rem;
+  }
+  .head-font {
+    font-size: 1.27rem;
+    padding: 11px;
+  }
+}
