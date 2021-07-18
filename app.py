@@ -9,10 +9,6 @@ from tutorials_info import Tutorials_info
 from googleapiclient.discovery import build
 
 app = Flask(__name__,template_folder="templats")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/programminglearner'
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
-
-db = SQLAlchemy(app)
 
 # config.json
 Paras = None
